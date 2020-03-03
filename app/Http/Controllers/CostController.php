@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Resources\costResource;
 use App\Model\cost;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class CostController extends Controller
+class CostController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,8 @@ class CostController extends Controller
      */
     public function index()
     {
-        //
+        $costs= cost::all();
+        return $this->sendResponse($costs, "successful");
     }
 
     /**
@@ -35,7 +39,15 @@ class CostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cost = new cost;
+        $cost->name = $request->name;
+        $cost->details = $request->details;
+        $cost->value = $request->value;
+        $cost->date = $request->date;
+        $cost->save();
+        return response([
+            'data' => new costResource($cost)
+        ],Response::HTTP_CREATED);
     }
 
     /**
@@ -47,6 +59,10 @@ class CostController extends Controller
     public function show(cost $cost)
     {
         //
+        return $this->sendResponse($cost, "successful");
+        // return response([
+        //     'data' => new costResource($cost)
+        // ],Response::HTTP_CREATED);
     }
 
     /**
@@ -69,7 +85,8 @@ class CostController extends Controller
      */
     public function update(Request $request, cost $cost)
     {
-        //
+        $cost->update($request->all());
+        return $this->sendResponse($request->all(), "successful");
     }
 
     /**
