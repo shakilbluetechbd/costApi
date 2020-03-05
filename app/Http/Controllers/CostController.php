@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\costResource;
 use App\Model\cost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CostController extends BaseController
@@ -43,7 +44,7 @@ class CostController extends BaseController
         $cost->name = $request->name;
         $cost->details = $request->details;
         $cost->value = $request->value;
-        $cost->date = $request->date; 
+        $cost->date = $request->date;
         $cost->user_id = $request->user_id;
         $cost->save();
         return response([
@@ -86,6 +87,7 @@ class CostController extends BaseController
      */
     public function update(Request $request, cost $cost)
     {
+
         $cost->update($request->all());
         return $this->sendResponse($request->all(), "successful");
     }
@@ -99,5 +101,12 @@ class CostController extends BaseController
     public function destroy(cost $cost)
     {
         //
+    }
+    public function CostUserCheck($Cost)
+    {
+        if (Auth::id() !== $Cost->user_id) {
+            // throw new CostNotBelongsToUser;
+            return ['errors' => 'Product Not Belongs to User'];
+        }
     }
 }
