@@ -19,6 +19,7 @@ class CreateIncomesTable extends Migration
             $table->float('value');
             $table->text('details');
             $table->date('date');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

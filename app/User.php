@@ -1,11 +1,10 @@
 <?php
 
 namespace App;
-use Laravel\Passport\HasApiTokens;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -37,4 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function costs()
+    {
+        return $this->hasMany('App\Model\cost');
+    }
+
+    public function incomes()
+    {
+        return $this->hasMany('App\Model\income');
+    }
+    public function loans()
+    {
+        return $this->hasMany('App\Model\loan');
+    }
 }

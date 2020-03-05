@@ -17,7 +17,7 @@ class CostController extends BaseController
      */
     public function index()
     {
-        $costs= cost::all();
+        $costs = cost::all();
         return $this->sendResponse($costs, "successful");
     }
 
@@ -43,11 +43,12 @@ class CostController extends BaseController
         $cost->name = $request->name;
         $cost->details = $request->details;
         $cost->value = $request->value;
-        $cost->date = $request->date;
+        $cost->date = $request->date; 
+        $cost->user_id = $request->user_id;
         $cost->save();
         return response([
-            'data' => new costResource($cost)
-        ],Response::HTTP_CREATED);
+            'data' => new costResource($cost),
+        ], Response::HTTP_CREATED);
     }
 
     /**

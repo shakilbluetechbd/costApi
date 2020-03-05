@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e2e4c657-e652-47a7-92ab-55b18dd82668",
+		"_postman_id": "1a215e8b-efd8-45fe-8f2a-f5fe0d5f00b9",
 		"name": "costApi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -69,7 +69,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/costs",
+							"raw": "http://127.0.0.1:8000/api/costs?",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -100,6 +100,358 @@
 				},
 				{
 					"name": "R cost",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "U cost",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"name\": \"et1\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"2020-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs/102?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs",
+								"102"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "C cost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"name\": \"et12\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"1971-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "income",
+			"item": [
+				{
+					"name": "C income",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"name\": \"et12\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"1971-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "U income",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"name\": \"et1\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"2020-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs/102?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs",
+								"102"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "R income",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "R incomes",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -159,121 +511,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/costs/102",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"costs",
-								"102"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "samsung",
-									"disabled": true
-								},
-								{
-									"key": "detail",
-									"value": "here we are",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "U cost",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \r\n        \"name\": \"et1\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"2020-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/costs/102",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"costs",
-								"102"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "samsung",
-									"disabled": true
-								},
-								{
-									"key": "detail",
-									"value": "here we are",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "C cost",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n        \r\n        \"name\": \"et12\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"1971-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/costs",
+							"raw": "http://127.0.0.1:8000/api/costs?",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -306,13 +544,272 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "income",
-			"item": [],
-			"protocolProfileBehavior": {}
-		},
-		{
 			"name": "loan",
-			"item": [],
+			"item": [
+				{
+					"name": "C loan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"name\": \"et12\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"1971-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "U loan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"name\": \"et1\",\r\n        \"value\": 159,\r\n        \"details\": \"whatever doesn't kill you simply makes you stranger.\",\r\n        \"date\": \"2020-02-04\",\r\n        \"created_at\": \"2020-03-02 12:34:34\",\r\n        \"updated_at\": \"2020-03-02 12:34:34\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs/102?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs",
+								"102"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "R loan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "R loans",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "reknown mobile ",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "200",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "stock",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "discount",
+									"value": "5",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/costs?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"costs"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "samsung",
+									"disabled": true
+								},
+								{
+									"key": "detail",
+									"value": "here we are",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -342,7 +839,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"grant_type\":\"password\",\n\t\"client_id\":\"2\",\n\t\"client_secret\":\"h3HPWzXTskFZl9TioSi9OOsSCxbXcFyJwK5oZR0m\",\n\t\"username\":\"asik@gmail.com\",\n\t\"password\": \"shakil123\"\n}"
+							"raw": "{\n\t\"grant_type\":\"password\",\n\t\"client_id\":\"2\",\n\t\"client_secret\":\"0Z8FLEsBggyUcVIkEI2hdUtkAZNljuKOWS7VJ6B0\",\n\t\"username\":\"shakil@gmail.com\",\n\t\"password\": \"shakil123\"\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:8000/oauth/token",

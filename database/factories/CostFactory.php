@@ -12,5 +12,8 @@ $factory->define(cost::class, function (Faker $faker) {
         'value'=>$faker->numberBetween(100,1000),
         'date'=>$faker->date,
         'details'=>$faker->paragraph,
+        'user_id' => function(){
+        	return App\User::all()->random();
+        },
     ];
 });
