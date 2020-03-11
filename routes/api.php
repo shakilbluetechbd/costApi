@@ -17,9 +17,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Route::resource('costs', 'CostController');
-Route::resource('incomes', 'IncomeController');
-Route::resource('loans', 'LoanController');
+// Route::resource('incomes', 'IncomeController');
+// Route::resource('loans', 'LoanController');
 
 Route::middleware('auth:api')->group( function () {
     Route::resource('costs', 'CostController');
+});
+Route::middleware('auth:api')->group( function () {
+    Route::resource('incomes', 'IncomeController');
+});
+Route::middleware('auth:api')->group( function () {
+    Route::resource('loans', 'LoanController');
 });

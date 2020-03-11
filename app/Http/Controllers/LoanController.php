@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Resources\loanResource;
 use App\Model\loan;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
-class LoanController extends Controller
+class LoanController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +19,9 @@ class LoanController extends Controller
      */
     public function index()
     {
-        //
+        $user= User::find(Auth()->id());
+        $loans = $user->loans;
+        return $this->sendResponse($loans, "successful");
     }
 
     /**
@@ -35,7 +42,16 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $loan = new loan;
+        $loan->name = $request->name;
+        $loan->details = $request->details;
+        $loan->value = $request->value;
+        $loan->date = $request->date;
+        $loan->user_id = Auth::id();
+        $loan->save();
+        return response([
+            'data' => new loanResource($loan),
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -47,6 +63,13 @@ class LoanController extends Controller
     public function show(loan $loan)
     {
         //
+        if (Auth::id() != $loan->user_id) {
+            return $this->sendError("Not the owner");
+        }
+        return $this->sendResponse($loan, "successful");
+        // return response([
+        //     'data' => new loanResource($loan)
+        // ],Response::HTTP_CREATED);
     }
 
     /**
@@ -69,7 +92,12 @@ class LoanController extends Controller
      */
     public function update(Request $request, loan $loan)
     {
-        //
+        if (Auth::id() != $loan->user_id) {
+            return $this->sendError("Not the owner");
+        }
+        $request->user_id = Auth::id();
+        $loan->update($request->all());
+        return $this->sendResponse($request->all(), "successful");
     }
 
     /**
@@ -81,5 +109,12 @@ class LoanController extends Controller
     public function destroy(loan $loan)
     {
         //
+    }
+    public function LoanUserCheck($Loan)
+    {
+        if (Auth::id() !== $Loan->user_id) {
+            // throw new LoanNotBelongsToUser;
+            return ['errors' => 'Product Not Belongs to User'];
+        }
     }
 }

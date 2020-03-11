@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Resources\incomeResource;
 use App\Model\income;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
-class IncomeController extends Controller
+class IncomeController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +19,9 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        //
+        $user= User::find(Auth()->id());
+        $incomes = $user->incomes;
+        return $this->sendResponse($incomes, "successful");
     }
 
     /**
@@ -35,7 +42,16 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $income = new income;
+        $income->name = $request->name;
+        $income->details = $request->details;
+        $income->value = $request->value;
+        $income->date = $request->date;
+        $income->user_id = Auth::id();
+        $income->save();
+        return response([
+            'data' => new incomeResource($income),
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -47,6 +63,13 @@ class IncomeController extends Controller
     public function show(income $income)
     {
         //
+        if (Auth::id() != $income->user_id) {
+            return $this->sendError("Not the owner");
+        }
+        return $this->sendResponse($income, "successful");
+        // return response([
+        //     'data' => new incomeResource($income)
+        // ],Response::HTTP_CREATED);
     }
 
     /**
@@ -69,7 +92,12 @@ class IncomeController extends Controller
      */
     public function update(Request $request, income $income)
     {
-        //
+        if (Auth::id() != $income->user_id) {
+            return $this->sendError("Not the owner");
+        }
+        $request->user_id = Auth::id();
+        $income->update($request->all());
+        return $this->sendResponse($request->all(), "successful");
     }
 
     /**
@@ -81,5 +109,12 @@ class IncomeController extends Controller
     public function destroy(income $income)
     {
         //
+    }
+    public function IncomeUserCheck($Income)
+    {
+        if (Auth::id() !== $Income->user_id) {
+            // throw new IncomeNotBelongsToUser;
+            return ['errors' => 'Product Not Belongs to User'];
+        }
     }
 }

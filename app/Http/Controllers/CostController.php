@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\costResource;
 use App\Model\cost;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,8 @@ class CostController extends BaseController
      */
     public function index()
     {
-        $costs = cost::all();
+        $user= User::find(Auth()->id());
+        $costs = $user->costs;
         return $this->sendResponse($costs, "successful");
     }
 
@@ -45,7 +47,7 @@ class CostController extends BaseController
         $cost->details = $request->details;
         $cost->value = $request->value;
         $cost->date = $request->date;
-        $cost->user_id = $request->user_id;
+        $cost->user_id = Auth::id();
         $cost->save();
         return response([
             'data' => new costResource($cost),
@@ -61,6 +63,9 @@ class CostController extends BaseController
     public function show(cost $cost)
     {
         //
+        if (Auth::id() != $cost->user_id) {
+            return $this->sendError("Not the owner");
+        }
         return $this->sendResponse($cost, "successful");
         // return response([
         //     'data' => new costResource($cost)
@@ -87,7 +92,10 @@ class CostController extends BaseController
      */
     public function update(Request $request, cost $cost)
     {
-
+        if (Auth::id() != $cost->user_id) {
+            return $this->sendError("Not the owner");
+        }
+        $request->user_id = Auth::id();
         $cost->update($request->all());
         return $this->sendResponse($request->all(), "successful");
     }
