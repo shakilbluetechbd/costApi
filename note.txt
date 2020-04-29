@@ -11,3 +11,4 @@ php artisan make:resource Product/ProductCollection
 php artisan make:resource Product/ProductResource
 php artisan make:resource ReviewResource
 php artisan passport:install
+php artisan make:middleware
