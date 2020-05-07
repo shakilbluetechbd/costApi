@@ -19,8 +19,7 @@ class LoanController extends BaseController
      */
     public function index()
     {
-        $user= User::find(Auth()->id());
-        $loans = $user->loans;
+        $loans= loan::where('user_id',Auth()->id())->paginate($request->per_page);
         return $this->sendResponse($loans, "successful");
     }
 
