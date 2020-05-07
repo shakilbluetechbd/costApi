@@ -108,7 +108,8 @@ class LoanController extends BaseController
      */
     public function destroy(loan $loan)
     {
-        //
+        $loan->delete();
+        return $this->sendResponse($loan, "Deleted");
     }
     public function LoanUserCheck($Loan)
     {

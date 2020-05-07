@@ -108,7 +108,8 @@ class CostController extends BaseController
      */
     public function destroy(cost $cost)
     {
-        //
+        $cost->delete();
+        return $this->sendResponse($cost, "Deleted");
     }
     public function CostUserCheck($Cost)
     {

@@ -108,7 +108,8 @@ class IncomeController extends BaseController
      */
     public function destroy(income $income)
     {
-        //
+        $income->delete();
+        return $this->sendResponse($income, "Deleted");
     }
     public function IncomeUserCheck($Income)
     {
