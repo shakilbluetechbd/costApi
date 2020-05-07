@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 // Route::resource('costs', 'CostController');
 // Route::resource('incomes', 'IncomeController');
 // Route::resource('loans', 'LoanController');
@@ -29,3 +29,5 @@ Route::middleware('auth:api')->group( function () {
 Route::middleware('auth:api')->group( function () {
     Route::resource('loans', 'LoanController');
 });
+
+Route::post('/user','UserController@store');
