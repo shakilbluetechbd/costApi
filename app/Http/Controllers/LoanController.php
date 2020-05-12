@@ -17,9 +17,9 @@ class LoanController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $loans= loan::where('user_id',Auth()->id())->paginate($request->per_page);
+        $loans= loan::where('user_id',Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
         return $this->sendResponse($loans, "successful");
     }
 

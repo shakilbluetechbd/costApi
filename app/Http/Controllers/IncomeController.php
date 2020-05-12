@@ -19,7 +19,7 @@ class IncomeController extends BaseController
      */
     public function index(Request $request)
     {
-        $incomes= income::where('user_id',Auth()->id())->paginate($request->per_page);
+        $incomes= income::where('user_id',Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
         return $this->sendResponse($incomes, "successful");
     }
 

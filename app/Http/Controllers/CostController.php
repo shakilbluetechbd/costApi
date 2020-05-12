@@ -19,7 +19,7 @@ class CostController extends BaseController
      */
     public function index(Request $request)
     {
-        $costs= cost::where('user_id',Auth()->id())->paginate($request->per_page);
+        $costs= cost::where('user_id',Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
         return $this->sendResponse($costs, "successful");
     }
 
