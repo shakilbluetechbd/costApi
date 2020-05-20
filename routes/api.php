@@ -30,5 +30,8 @@ Route::middleware('auth:api')->group( function () {
 Route::middleware('auth:api')->group( function () {
     Route::resource('loans', 'LoanController');
 });
+Route::middleware('auth:api')->group( function () {
+    Route::resource('assets', 'AssetController');
+});
 
 Route::post('/user','UserController@store');

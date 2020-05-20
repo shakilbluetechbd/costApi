@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController as BaseController;
-use App\Http\Resources\loanResource;
-use App\Model\loan;
+use App\Http\Resources\assetResource;
+use App\Model\asset;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoanController extends BaseController
+class AssetController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +21,8 @@ class LoanController extends BaseController
     {
         try {
 
-            $loans = loan::where('user_id', Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
-            return $this->sendResponse($loans, "Loans fetched successfully");
+            $assets = asset::where('user_id', Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
+            return $this->sendResponse($assets, "Assets fetched successfully");
         } catch (\Exception $e) {
 
             return $this->sendError($e);
@@ -47,16 +47,16 @@ class LoanController extends BaseController
      */
     public function store(Request $request)
     {
-        $loan = new loan;
-        $loan->name = $request->name;
-        $loan->details = $request->details;
-        $loan->value = $request->value;
-        $loan->date = $request->date;
-        $loan->user_id = Auth::id();
+        $asset = new asset;
+        $asset->name = $request->name;
+        $asset->details = $request->details;
+        $asset->value = $request->value;
+        $asset->date = $request->date;
+        $asset->user_id = Auth::id();
 
         try {
-            $loan->save();
-            return $this->sendResponse($loan, "Loan created successfully");
+            $asset->save();
+            return $this->sendResponse($asset, "Asset created successfully");
         } catch (\Exception $e) {
             return $this->sendError($e);
         }
@@ -65,35 +65,35 @@ class LoanController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\loan  $loan
+     * @param  \App\Model\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function show(loan $loan)
+    public function show(asset $asset)
     {
         try {
-            return $this->sendResponse("loan", "successful");
+            return $this->sendResponse("asset", "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
         }
 
 
         //
-        // if (Auth::id() != $loan->user_id) {
+        // if (Auth::id() != $asset->user_id) {
         //     return $this->sendError("Not the owner");
         // }
-        // return $this->sendResponse($loan, "successful");
+        // return $this->sendResponse($asset, "successful");
         // return response([
-        //     'data' => new loanResource($loan)
+        //     'data' => new assetResource($asset)
         // ],Response::HTTP_CREATED);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\loan  $loan
+     * @param  \App\Model\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function edit(loan $loan)
+    public function edit(asset $asset)
     {
         //
     }
@@ -102,18 +102,18 @@ class LoanController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\loan  $loan
+     * @param  \App\Model\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, loan $loan)
+    public function update(Request $request, asset $asset)
     {
-        if (Auth::id() != $loan->user_id) {
+        if (Auth::id() != $asset->user_id) {
             return $this->sendError("Not the owner");
         }
 
         try {
             $request->user_id = Auth::id();
-            $loan->update($request->all());
+            $asset->update($request->all());
             return $this->sendResponse($request->all(), "Update successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
@@ -123,22 +123,22 @@ class LoanController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\loan  $loan
+     * @param  \App\Model\asset  $asset
      * @return \Illuminate\Http\Response
      */
-    public function destroy(loan $loan)
+    public function destroy(asset $asset)
     {
         try {
-            $loan->delete();
-            return $this->sendResponse($loan, "Deleted");
+            $asset->delete();
+            return $this->sendResponse($asset, "Deleted");
         } catch (\Exception $e) {
             return $this->sendError($e);
         }
     }
-    public function LoanUserCheck($Loan)
+    public function AssetUserCheck($Asset)
     {
-        if (Auth::id() !== $Loan->user_id) {
-            // throw new LoanNotBelongsToUser;
+        if (Auth::id() !== $Asset->user_id) {
+            // throw new AssetNotBelongsToUser;
             return ['errors' => 'Product Not Belongs to User'];
         }
     }

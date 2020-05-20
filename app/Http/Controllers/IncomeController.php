@@ -19,8 +19,14 @@ class IncomeController extends BaseController
      */
     public function index(Request $request)
     {
-        $incomes= income::where('user_id',Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
-        return $this->sendResponse($incomes, "successful");
+        try {
+
+            $incomes = income::where('user_id', Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
+            return $this->sendResponse($incomes, "Incomes fetched successfully");
+        } catch (\Exception $e) {
+
+            return $this->sendError($e);
+        }
     }
 
     /**
@@ -47,10 +53,13 @@ class IncomeController extends BaseController
         $income->value = $request->value;
         $income->date = $request->date;
         $income->user_id = Auth::id();
-        $income->save();
-        return response([
-            'data' => new incomeResource($income),
-        ], Response::HTTP_CREATED);
+
+        try {
+            $income->save();
+            return $this->sendResponse($income, "Income created successfully");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
     }
 
     /**
@@ -61,11 +70,18 @@ class IncomeController extends BaseController
      */
     public function show(income $income)
     {
-        //
-        if (Auth::id() != $income->user_id) {
-            return $this->sendError("Not the owner");
+        try {
+            return $this->sendResponse("income", "successful");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
         }
-        return $this->sendResponse($income, "successful");
+
+
+        //
+        // if (Auth::id() != $income->user_id) {
+        //     return $this->sendError("Not the owner");
+        // }
+        // return $this->sendResponse($income, "successful");
         // return response([
         //     'data' => new incomeResource($income)
         // ],Response::HTTP_CREATED);
@@ -94,9 +110,14 @@ class IncomeController extends BaseController
         if (Auth::id() != $income->user_id) {
             return $this->sendError("Not the owner");
         }
-        $request->user_id = Auth::id();
-        $income->update($request->all());
-        return $this->sendResponse($request->all(), "successful");
+
+        try {
+            $request->user_id = Auth::id();
+            $income->update($request->all());
+            return $this->sendResponse($request->all(), "Update successful");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
     }
 
     /**
@@ -107,8 +128,12 @@ class IncomeController extends BaseController
      */
     public function destroy(income $income)
     {
-        $income->delete();
-        return $this->sendResponse($income, "Deleted");
+        try {
+            $income->delete();
+            return $this->sendResponse($income, "Deleted");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
     }
     public function IncomeUserCheck($Income)
     {

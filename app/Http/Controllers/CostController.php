@@ -19,8 +19,14 @@ class CostController extends BaseController
      */
     public function index(Request $request)
     {
-        $costs= cost::where('user_id',Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
-        return $this->sendResponse($costs, "successful");
+        try {
+
+            $costs = cost::where('user_id', Auth()->id())->orderBy('id', 'DESC')->paginate($request->per_page);
+            return $this->sendResponse($costs, "Costs fetched successfully");
+        } catch (\Exception $e) {
+
+            return $this->sendError($e);
+        }
     }
 
     /**
@@ -47,10 +53,13 @@ class CostController extends BaseController
         $cost->value = $request->value;
         $cost->date = $request->date;
         $cost->user_id = Auth::id();
-        $cost->save();
-        return response([
-            'data' => new costResource($cost),
-        ], Response::HTTP_CREATED);
+
+        try {
+            $cost->save();
+            return $this->sendResponse($cost, "Cost created successfully");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
     }
 
     /**
@@ -61,11 +70,18 @@ class CostController extends BaseController
      */
     public function show(cost $cost)
     {
-        //
-        if (Auth::id() != $cost->user_id) {
-            return $this->sendError("Not the owner");
+        try {
+            return $this->sendResponse("cost", "successful");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
         }
-        return $this->sendResponse($cost, "successful");
+
+
+        //
+        // if (Auth::id() != $cost->user_id) {
+        //     return $this->sendError("Not the owner");
+        // }
+        // return $this->sendResponse($cost, "successful");
         // return response([
         //     'data' => new costResource($cost)
         // ],Response::HTTP_CREATED);
@@ -94,9 +110,14 @@ class CostController extends BaseController
         if (Auth::id() != $cost->user_id) {
             return $this->sendError("Not the owner");
         }
-        $request->user_id = Auth::id();
-        $cost->update($request->all());
-        return $this->sendResponse($request->all(), "successful");
+
+        try {
+            $request->user_id = Auth::id();
+            $cost->update($request->all());
+            return $this->sendResponse($request->all(), "Update successful");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
     }
 
     /**
@@ -107,8 +128,12 @@ class CostController extends BaseController
      */
     public function destroy(cost $cost)
     {
-        $cost->delete();
-        return $this->sendResponse($cost, "Deleted");
+        try {
+            $cost->delete();
+            return $this->sendResponse($cost, "Deleted");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
     }
     public function CostUserCheck($Cost)
     {

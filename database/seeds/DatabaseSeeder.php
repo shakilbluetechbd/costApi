@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(CostSeeder::class);
         // $this->call(IncomeSeeder ::class);
         // $this->call(LoanSeeder::class);
+        // $this->call(AssetSeeder::class);
     }
 }
