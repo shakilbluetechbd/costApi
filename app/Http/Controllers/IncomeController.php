@@ -71,7 +71,7 @@ class IncomeController extends BaseController
     public function show(income $income)
     {
         try {
-            return $this->sendResponse("income", "successful");
+            return $this->sendResponse($income, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
         }

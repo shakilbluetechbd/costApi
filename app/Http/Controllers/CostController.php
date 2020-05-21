@@ -71,7 +71,7 @@ class CostController extends BaseController
     public function show(cost $cost)
     {
         try {
-            return $this->sendResponse("cost", "successful");
+            return $this->sendResponse($cost, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
         }

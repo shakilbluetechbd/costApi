@@ -71,7 +71,7 @@ class AssetController extends BaseController
     public function show(asset $asset)
     {
         try {
-            return $this->sendResponse("asset", "successful");
+            return $this->sendResponse($asset, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
         }

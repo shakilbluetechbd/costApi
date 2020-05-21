@@ -71,7 +71,7 @@ class LoanController extends BaseController
     public function show(loan $loan)
     {
         try {
-            return $this->sendResponse("loan", "successful");
+            return $this->sendResponse($loan, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
         }
