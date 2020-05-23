@@ -35,3 +35,6 @@ Route::middleware('auth:api')->group( function () {
 });
 
 Route::post('/user','UserController@store');
+
+Route::middleware('auth:api')->post('/cost/search','CostController@search');
+Route::middleware('auth:api')->post('/cost/report','CostController@report');
