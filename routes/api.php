@@ -38,3 +38,12 @@ Route::post('/user','UserController@store');
 
 Route::middleware('auth:api')->post('/cost/search','CostController@search');
 Route::middleware('auth:api')->post('/cost/report','CostController@report');
+
+Route::middleware('auth:api')->post('/income/search','IncomeController@search');
+Route::middleware('auth:api')->post('/income/report','IncomeController@report');
+
+Route::middleware('auth:api')->post('/loan/search','LoanController@search');
+Route::middleware('auth:api')->post('/loan/report','LoanController@report');
+
+Route::middleware('auth:api')->post('/asset/search','AssetController@search');
+Route::middleware('auth:api')->post('/asset/report','AssetController@report');

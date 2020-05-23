@@ -142,4 +142,40 @@ class LoanController extends BaseController
             return ['errors' => 'Product Not Belongs to User'];
         }
     }
+
+    public function search(Request $request)
+    {
+        $name = $request->name;
+        $toDate = $request->toDate ? $request->toDate : "3000-02-04";
+        $fromDate = $request->fromDate ? $request->fromDate : "1900-02-04";
+        $toValue = $request->toValue ? $request->toValue : "10000000";
+        $fromValue = $request->fromValue ? $request->fromValue : "0";
+        $sortBy =$request->sortBy ? $request->sortBy : ["name"=>"id","value"=>"DESC"];
+        $per_page = $request->per_page;
+        $user_id = Auth::id();
+        try {
+            $loan = loan::Search($user_id, $name, $toDate, $fromDate, $toValue, $fromValue, $sortBy, $per_page);
+            return $this->sendResponse($loan, "Loans fetched successfully");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
+    }
+
+    public function report(Request $request)
+    {
+        $name = $request->name;
+        $toDate = $request->toDate ? $request->toDate : "3000-02-04";
+        $fromDate = $request->fromDate ? $request->fromDate : "1900-02-04";
+        $toValue = $request->toValue ? $request->toValue : "10000000";
+        $fromValue = $request->fromValue ? $request->fromValue : "0";
+        $sortBy =$request->sortBy ? $request->sortBy : ["name"=>"id","value"=>"DESC"];
+        $per_page = $request->per_page;
+        $user_id = Auth::id();
+        try {
+            $loan = loan::Report($user_id, $name, $toDate, $fromDate, $toValue, $fromValue, $sortBy, $per_page);
+            return $this->sendResponse($loan, "Report fetched successfully");
+        } catch (\Exception $e) {
+            return $this->sendError($e);
+        }
+    }
 }
