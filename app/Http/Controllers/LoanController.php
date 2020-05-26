@@ -71,6 +71,9 @@ class LoanController extends BaseController
     public function show(loan $loan)
     {
         try {
+            if (Auth::id() !== $loan->user_id) {
+                throw new \Exception("Permission denied");
+            }
             return $this->sendResponse($loan, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);

@@ -26,6 +26,7 @@ class UserController extends Controller
             return response([
                 'data' => new userResource($user),
                 'message' => ['created'],
+                "success"=>true,
                 'error' => []
             ], Response::HTTP_CREATED);
         } catch (\Exception $e) {
@@ -33,6 +34,7 @@ class UserController extends Controller
             return response([
                 'data' => new userResource($user),
                 'message' => ['not created'],
+                "success"=>false,
                 'error' => [$e->getMessage()]
             ], Response::HTTP_BAD_REQUEST);
              

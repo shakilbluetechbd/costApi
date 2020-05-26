@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\costResource;
 use App\Model\cost;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,9 @@ class CostController extends BaseController
     public function show(cost $cost)
     {
         try {
+            if (Auth::id() !== $cost->user_id) {
+                throw new Exception("Permission denied");
+            }
             return $this->sendResponse($cost, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
@@ -150,7 +154,7 @@ class CostController extends BaseController
         $fromDate = $request->fromDate ? $request->fromDate : "1900-02-04";
         $toValue = $request->toValue ? $request->toValue : "10000000";
         $fromValue = $request->fromValue ? $request->fromValue : "0";
-        $sortBy =$request->sortBy ? $request->sortBy : ["name"=>"id","value"=>"DESC"];
+        $sortBy = $request->sortBy ? $request->sortBy : ["name" => "id", "value" => "DESC"];
         $per_page = $request->per_page;
         $user_id = Auth::id();
         try {
@@ -168,7 +172,7 @@ class CostController extends BaseController
         $fromDate = $request->fromDate ? $request->fromDate : "1900-02-04";
         $toValue = $request->toValue ? $request->toValue : "10000000";
         $fromValue = $request->fromValue ? $request->fromValue : "0";
-        $sortBy =$request->sortBy ? $request->sortBy : ["name"=>"id","value"=>"DESC"];
+        $sortBy = $request->sortBy ? $request->sortBy : ["name" => "id", "value" => "DESC"];
         $per_page = $request->per_page;
         $user_id = Auth::id();
         try {

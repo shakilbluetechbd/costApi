@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\incomeResource;
 use App\Model\income;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,9 @@ class IncomeController extends BaseController
     public function show(income $income)
     {
         try {
+            if (Auth::id() !== $income->user_id) {
+                throw new Exception("Permission denied");
+            }
             return $this->sendResponse($income, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);

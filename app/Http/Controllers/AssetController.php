@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\assetResource;
 use App\Model\asset;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,9 @@ class AssetController extends BaseController
     public function show(asset $asset)
     {
         try {
+            if (Auth::id() !== $asset->user_id) {
+                throw new Exception("Permission denied");
+            }
             return $this->sendResponse($asset, "successful");
         } catch (\Exception $e) {
             return $this->sendError($e);
@@ -150,7 +154,7 @@ class AssetController extends BaseController
         $fromDate = $request->fromDate ? $request->fromDate : "1900-02-04";
         $toValue = $request->toValue ? $request->toValue : "10000000";
         $fromValue = $request->fromValue ? $request->fromValue : "0";
-        $sortBy =$request->sortBy ? $request->sortBy : ["name"=>"id","value"=>"DESC"];
+        $sortBy = $request->sortBy ? $request->sortBy : ["name" => "id", "value" => "DESC"];
         $per_page = $request->per_page;
         $user_id = Auth::id();
         try {
@@ -168,7 +172,7 @@ class AssetController extends BaseController
         $fromDate = $request->fromDate ? $request->fromDate : "1900-02-04";
         $toValue = $request->toValue ? $request->toValue : "10000000";
         $fromValue = $request->fromValue ? $request->fromValue : "0";
-        $sortBy =$request->sortBy ? $request->sortBy : ["name"=>"id","value"=>"DESC"];
+        $sortBy = $request->sortBy ? $request->sortBy : ["name" => "id", "value" => "DESC"];
         $per_page = $request->per_page;
         $user_id = Auth::id();
         try {
